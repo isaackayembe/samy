@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TrashPick-up : Solutions efficaces pour la gestion des déchets, avec un engagement vers un avenir sans déchets.">
+    <meta name="keywords" content="gestion des déchets, zéro déchet, services de ramassage, recyclage, TrashPick-up, trash,pickup,trashpickup">
+    <meta name="author" content="TrashPick-up">
+    {% load static %}
+    <link href="{% static 'css/local.css' %}"rel="stylesheet"> {% load static %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> {% load static %}
+    <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">{% load static %}
+     {% endblock %}
+    <title>YouEvent.samuel&judith</title>
+    {% load static %}
+    <script src="{% static 'js/click-scroll.js' %}"></script>{% load static %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>{% load static %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>{% load static %}
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>{% load static %}
+    <script src="{% static 'js/custom.js' %}"></script>{% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin_custom.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'admin_custom.js' %}"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <main>
+      
+        {% block content %} {% endblock %}
+        
+    </main>
+</body>
+</html>

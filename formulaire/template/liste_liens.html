@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        .navbar {
+            background-color: #000000; /* Couleur noir */
+            position: relative; /* Fixe la navbar en haut */
+            width: 100%; /* Prend toute la largeur */
+            height: auto;
+            top: 0; /* Positionne en haut */
+            z-index: 1000; /* Assure que la navbar reste au-dessus */
+            color: #fff; /* Couleur du texte de la navbar */
+        }
+        .navbar .main-title {
+            font-size: 2em;
+            margin: 0;
+            display: inline-block;
+        }
+        .nav-list {
+            list-style-type: none; /* Supprime les puces */
+            padding: 0;
+            margin: 0;
+            display: inline-block; /* Affiche les éléments en ligne */
+        }
+        .nav-item {
+            display: inline; /* Affiche les éléments en ligne */
+            margin: 0 15px; /* Marge entre les éléments */
+        }
+        .nav-link {
+            color: #ffffff; /* Couleur du texte des liens */
+            text-decoration: none; /* Supprime le soulignement */
+            font-size: 1.1em; /* Taille de police */
+        }
+        .nav-link:hover {
+            text-decoration: underline; /* Souligne au survol */
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 80px; /* Ajout d'une marge pour éviter la superposition avec la navbar */
+        }
+        p {
+            font-size: 1.2em;
+            text-align: center;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+    
+    <nav class="navbar">
+        <h3 class="main-title">YouEvent.com</h3>
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a class="nav-link click-scroll" href="{% url 'generer_lien' %}"><i class="bi bi-house-fill"></i></a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>Liste des Participants</h1>
+    <p>Nombre de participants enregistrés : {{ count }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Postnom</th>
+                <th>Prénom</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <td>{{ participant.id }}</td>
+                <td>{{ participant.nom }}</td>
+                <td>{{ participant.postnom }}</td>
+                <td>{{ participant.prenom }}</td>
+                <td>{{ participant.genre }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Aucun participant trouvé.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="{% url 'telecharger_pdf' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Télécharger en PDF</button>
+    </form>
+
+    <form action="{% url 'telecharger_xlsx' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Télécharger en XLSX</button>
+    </form>
+    <style>
+        .container {
+            text-align: center;  /* Centre le texte horizontalement */
+            margin-top: 20px;  /* Ajoute de l'espace au-dessus */
+        }
+    
+        .red-icon {
+            color: red;  /* Couleur rouge pour l'icône */
+            font-size: 24px;  /* Ajustez la taille selon vos besoins */
+            vertical-align: middle;  /* Aligne l'icône avec le texte */
+        }
+    
+        .nav-link {
+            font-size: 18px;  /* Taille de police pour le texte */
+            display: flex;  /* Utilise flexbox pour aligner l'icône et le texte */
+            align-items: center;  /* Centre l'icône et le texte verticalement */
+            justify-content: center;  /* Centre le contenu horizontalement */
+            text-decoration: none;  /* Supprime le soulignement */
+        }
+    </style>
+   <div class="container">
+    <a href="{% url 'generer_lien' %}">
+        <i class="bi bi-wifi-off red-icon"></i> Déconnexion
+    </a>
+</div>
+{% endblock %}
