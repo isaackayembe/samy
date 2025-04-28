@@ -19,7 +19,6 @@
     <div class="snow"></div>
     <div class="container text-center">
         <h1 class="announcement">Bienvenue à notre mariage !</h1>
-        <p class="announcement">Nous avons le plaisir de vous annoncer que nous allons nous marier et nous serions heureux de vous avoir à nos côtés pour célébrer ce moment unique.</p>
         <h3 class="confirmation">Merci de confirmer votre présence pour la date du 19 juillet 2025 en cliquant sur le bouton ci-dessous :</h3>
         <a href="{% url 'remplir_formulaire' %}" target="_blank" class="btn-confirm">
             Remplir le formulaire
@@ -43,6 +42,7 @@
         z-index: 1000; /* Assure que la navbar reste au-dessus */
         color: #fff; /* Couleur du texte de la navbar */
     }
+
     .main-title {
         margin: 0; /* Pas de marge */
         font-size: 2.5em; /* Taille de police plus grande */
@@ -71,7 +71,7 @@
         display: flex; /* Utilise flexbox pour centrer le contenu */
         align-items: flex-end; /* Aligne le contenu en bas */
         justify-content: center; /* Centre horizontalement */
-        padding: 40px; /* Espacement en bas */
+        padding: 80px; /* Espacement en bas */
         margin-top: 80px; /* Espace pour la navbar */
         position: relative; /* Position relative pour le dégradé */
         animation: wave 5s infinite ease-in-out; /* Animation de vagues */

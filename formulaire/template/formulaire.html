@@ -4,41 +4,98 @@
 {% block content %}
 <nav class="navbar">
     <h3 class="main-title">YouEvent.com</h3>
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a class="nav-link click-scroll" href="{% url 'generer_lien' %}"><i class="bi bi-house-fill"></i></a>
+        </li>
+    </ul>
 </nav>
 <div class="background-image">
     <div class="blur-overlay"></div>
-    <div class="container mt-5">
-        <h2 class="text-center text-white mb-4">Formulaire d'invitation</h2>
-        <form method="post" class="border p-4 rounded shadow bg-white">
-            {% csrf_token %}
-            <div class="mb-3">
-                {{ form.as_p|safe }}
-            </div>
-            <button type="submit" class="btn btn-primary btn-block rounded">Soumettre</button>
-            {% if message %}
-    <p style="color: green;">{{ message }}</p>
-{% endif %}
-        </form>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh; padding-top: 0;">
+        <div class="form-container border p-4 rounded shadow">
+            <h2 class="text-center text-dart mb-4">Formulaire d'invitation</h2>
+            <form method="post" class="bg-transparent">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.nom.label }}
+                    {{ form.nom }}
+                    {{ form.nom.errors }}
+                </div>
+                <div class="mb-3">
+                    {{ form.postnom.label }}
+                    {{ form.postnom }}
+                    {{ form.postnom.errors }}
+                </div>
+                <div class="mb-3">
+                    {{ form.prenom.label }}
+                    {{ form.prenom }}
+                    {{ form.prenom.errors }}
+                </div>
+                <div class="mb-3">
+                    {{ form.genre.label }}
+                    {{ form.genre }}
+                    {{ form.genre.errors }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block rounded">Soumettre</button>
+                {% if message %}
+                    <p class="success-message">{{ message }}</p>
+                {% endif %}
+            </form>
+        </div>
     </div>
-
 </div>
-{% if message %}
-    <p style="color: green;">{{ message }}</p>
-{% endif %}
 
 <style>
-     body {
-        overflow: hidden; /* Empêche le défilement */
+    /* Styles de la navbar */
+    .navbar {
+        background-color: #000000;
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: 0;
+        z-index: 1000;
+        color: #fff;
+        padding: 15px; /* Ajout de padding */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Ombre pour la navbar */
     }
+
+    .navbar .main-title {
+        font-size: 2em;
+        margin: 0;
+        display: inline-block;
+    }
+
+    .nav-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+    }
+
+    .nav-item {
+        display: inline;
+        margin: 0 15px;
+    }
+
+    .nav-link {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+
+    .nav-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Styles de l'arrière-plan et du formulaire */
     .background-image {
         background-image: url("{% static 'image/save1.jpg' %}");
-        background-size: cover; /* Couvre tout l'élément */
-        background-position: center; /* Centre l'image */
-        height: 100vh; /* Hauteur de la fenêtre */
-        position: relative; /* Position relative pour le dégradé */
-        align-items: flex-end; /* Aligne le contenu en bas */
-        justify-content: center; /* Centre horizontalement */
-        padding: 40px; /* Espacement en bas */
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* Assurez-vous que la hauteur est 100vh */
+        position: relative;
+        margin-top: -60px; /* Ajustement pour superposer avec la navbar */
     }
 
     .blur-overlay {
@@ -47,75 +104,39 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5); /* Couleur sombre pour le contraste */
-        backdrop-filter: blur(10px); /* Appliquer le flou */
-        z-index: 1; /* En dessous du contenu */
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 1;
     }
 
-    .container {
-        background-color: rgba(1, 48, 45, 0.5); /* Fond noir semi-transparent */
-        padding: 5px; /* Rembourrage */
-        border-radius: 15px; /* Coins arrondis */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de profondeur */
-        text-align: center; /* Centrer le texte */
-        width: 80%; /* Largeur du conteneur */
-        max-width: 70%; /* Largeur maximale */
-        position: relative; /* Position relative pour le texte */
-        z-index: 3; /* Assure que le texte soit au-dessus de l'overlay */
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.9); /* Fond blanc légèrement transparent */
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        max-width: 400px;
     }
 
-    h2 {
-        font-family: 'Arial', sans-serif; /* Police du titre */
+    /* Styles pour les messages de succès */
+    .success-message {
+        color: green;
+        text-align: center;
+        margin-top: 10px;
     }
 
-    /* Styles pour arrondir les champs de formulaire */
-    .form-control {
-        border-radius: 20px;  /* Arrondir les champs */
+    /* Styles des champs de formulaire */
+    .form-control, .form-select {
+        border-radius: 10px;  /* Arrondir les champs */
         padding: 10px;        /* Espacement interne */
         border: 1px solid #ccc; /* Bordure légère */
         transition: border-color 0.3s; /* Transition pour l'effet au focus */
     }
 
-    .form-control:focus {
+    .form-control:focus, .form-select:focus {
         border-color: #007bff; /* Couleur de bordure au focus */
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre au focus */
     }
-
-    /* Styles pour le bouton */
-    .btn {
-        border-radius: 20px;  /* Arrondir le bouton */
-        font-weight: bold;     /* Épaissir le texte du bouton */
-        transition: background-color 0.3s; /* Transition au survol */
-    }
-
-    .btn:hover {
-        background-color: #0056b3; /* Couleur au survol */
-    }
-
-    /* Styles pour les placeholders */
-    ::placeholder {
-        color: #999;           /* Couleur du placeholder */
-        opacity: 1;            /* Opacité */
-    }
-
-    /* Pour les navigateurs spécifiques */
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: #999;
-    }
-    ::-ms-input-placeholder { /* Microsoft Edge */
-        color: #999;
-    }
-
-    .navbar {
-        background-color: #000000; /* Couleur noir */
-        padding: 15px; /* Rembourrage */
-        text-align: center; /* Centre le titre */
-        position: fixed; /* Fixe la navbar en haut */
-        width: 100%; /* Prend toute la largeur */
-        top: 0; /* Positionne en haut */
-        z-index: 1000; /* Assure que la navbar reste au-dessus */
-        color: #fff; /* Couleur du texte de la navbar */
-    }
 </style>
-
 {% endblock %}

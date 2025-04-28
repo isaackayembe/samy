@@ -14,6 +14,11 @@ from pathlib import Path
 import os
 
 
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get('APP_URL'),
+]
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +32,7 @@ SECRET_KEY = 'django-insecure-m+%2@e)-7c!7y^-s(7wv8+h+y#%i8y7j22!kdwjzozt-)tw#@+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
