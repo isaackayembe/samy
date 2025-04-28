@@ -30,8 +30,9 @@ CSRF_TRUSTED_ORIGINS = [
     "https://samy-1.onrender.com",
 ]
 
-ALLOWED_HOSTS = ['*']
 
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+PORT = os.environ.get('PORT', 8000)  # 8000 si pas fourni (local)
 
 # Application definition
 
