@@ -26,13 +26,10 @@ SECRET_KEY = 'django-insecure-m+%2@e)-7c!7y^-s(7wv8+h+y#%i8y7j22!kdwjzozt-)tw#@+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-CSRF_TRUSTED_ORIGINS = [
-    "https://samy-1.onrender.com",
-]
 
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
-PORT = os.environ.get('PORT', 8000)  # 8000 si pas fourni (local)
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -44,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      'formulaire',
-     'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -55,9 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'corsheaders.middleware.CorsMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True  # Accepte toutes les origines
 
 ROOT_URLCONF = 'mariage.urls'
 
