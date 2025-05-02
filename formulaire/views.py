@@ -18,6 +18,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import requests 
 from django.contrib import messages
+from collections import Counter  # Assurez-vous d'importer Counter
+
 def generer_lien(request):
     return render(request, 'lien.html')
 
@@ -57,12 +59,23 @@ def remplir_formulaire(request):
     return render(request, 'formulaire.html', {'form': form, 'message': message})
 
 @login_required
+
 def liste_liens(request):
     participants = Participant.objects.all()  # Récupère tous les participants
     count_participants = participants.count()  # Compte le nombre de participants
+
+    # Comptez les boissons
+    boissons = [participant.boisson for participant in participants]
+    boissons_conjoints = [participant.boisson_conjoint for participant in participants]
+    
+    # Combinez les deux listes
+    toutes_les_boissons = boissons + boissons_conjoints
+    boisson_count = Counter(toutes_les_boissons)  # Utilisez Counter ici
+
     return render(request, 'liste_liens.html', {
         'participants': participants,
-        'count': count_participants  # Passe le nombre de participants au template
+        'count': count_participants,
+        'boisson_count': boisson_count.items(),  # Passez les items du Counter
     })
 
 def telecharger_pdf(request):
@@ -77,7 +90,7 @@ def telecharger_pdf(request):
     # Ajouter des données au PDF
     y = height - 40
     for participant in participants:
-        p.drawString(100, y, f"{participant.id} {participant.nom} {participant.postnom}, {participant.prenom}, {participant.genre}")
+        p.drawString(100, y, f"{participant.id}, {participant.nom} ,{participant.nom_conjoint}, {participant.postnom}, {participant.prenom}, {participant.genre}, {participant.boisson}, {participant.boisson_conjoint}")
         y -= 20
 
     p.showPage()
@@ -89,7 +102,7 @@ def telecharger_pdf(request):
 
 def telecharger_xlsx(request):
     # Récupérer tous les participants
-    participants = Participant.objects.all().values('id','nom', 'postnom', 'prenom', 'genre')
+    participants = Participant.objects.all().values('id','nom', 'nom_conjoint','postnom', 'prenom', 'genre', 'boisson', 'boisson_conjoint')
 
     # Convertir en DataFrame pandas
     df = pd.DataFrame(participants)

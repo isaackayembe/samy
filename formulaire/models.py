@@ -8,6 +8,36 @@ class Participant(models.Model):
         ('couple', 'Couple'),
         ('singleton', 'Singleton'),
     ])
+    boisson = models.CharField(max_length=50, choices=[
+        ('fantan', 'Fantan'),
+        ('coca', 'Coca'),
+        ('vitalo', 'Vitalo'),
+        ('eau', 'Eau'),
+        ('primus', 'Primus'),
+        ('turbo', 'Turbo'),
+        ('nkoyi_likofi', 'Nkoyi Likofi'),
+        ('nkoyi_grand', 'Nkoyi Grand'),
+        ('heineken', 'Heineken'),
+        ('beaufort', 'Beaufort'),
+        ('castel', 'Castel'),
+        ('tembo', 'Tembo'),
+    ])
+    nom_conjoint = models.CharField(max_length=100, blank=True, null=True)
+    prenom_conjoint = models.CharField(max_length=100, blank=True, null=True)
+    boisson_conjoint = models.CharField(max_length=50, choices=[
+        ('fantan', 'Fantan'),
+        ('coca', 'Coca'),
+        ('vitalo', 'Vitalo'),
+        ('eau', 'Eau'),
+        ('primus', 'Primus'),
+        ('turbo', 'Turbo'),
+        ('nkoyi_likofi', 'Nkoyi Likofi'),
+        ('nkoyi_grand', 'Nkoyi Grand'),
+        ('heineken', 'Heineken'),
+        ('beaufort', 'Beaufort'),
+        ('castel', 'Castel'),
+        ('tembo', 'Tembo'),
+    ], blank=True, null=True)
 
     def __str__(self):
         return f"{self.prenom} {self.nom} {self.postnom}"

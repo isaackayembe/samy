@@ -12,7 +12,7 @@
 </nav>
 <div class="background-image">
     <div class="blur-overlay"></div>
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh; padding-top: 0;">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; padding-top: 0;">
         <div class="form-container border p-4 rounded shadow">
             <h2 class="text-center text-dart mb-4">Formulaire d'invitation</h2>
             <form method="post" class="bg-transparent">
@@ -37,6 +37,21 @@
                     {{ form.genre }}
                     {{ form.genre.errors }}
                 </div>
+                <div class="mb-3">
+                    {{ form.boisson.label }}
+                    {{ form.boisson }}
+                    {{ form.boisson.errors }}
+                </div>
+                <div class="mb-3" id="conjoint-field" style="display: none;">
+                    {{ form.nom_conjoint.label }}
+                    {{ form.nom_conjoint }}
+                    {{ form.nom_conjoint.errors }}
+                </div>
+                <div class="mb-3" id="boisson-conjoint-field" style="display: none;">
+                    {{ form.boisson_conjoint.label }}
+                    {{ form.boisson_conjoint }}
+                    {{ form.boisson_conjoint.errors }}
+                </div>
                 <button type="submit" class="btn btn-primary btn-block rounded">Soumettre</button>
                 {% if message %}
                     <p class="success-message">{{ message }}</p>
@@ -45,6 +60,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const genreField = document.getElementById('id_genre'); // ID du champ genre
+        const conjointField = document.getElementById('conjoint-field'); // Champ pour le conjoint
+        const boissonConjointField = document.getElementById('boisson-conjoint-field'); // Champ pour la boisson du conjoint
+
+        function toggleConjointField() {
+            if (genreField.value === '1') { // '1' correspond à 'Couple'
+                conjointField.style.display = 'block';
+                boissonConjointField.style.display = 'block'; // Affiche le champ boisson du conjoint
+            } else {
+                conjointField.style.display = 'none';
+                boissonConjointField.style.display = 'none'; // Cache le champ boisson du conjoint
+                document.getElementById('id_nom_conjoint').value = ''; // Réinitialise le champ
+                document.getElementById('id_boisson_conjoint').value = ''; // Réinitialise le champ de boisson
+            }
+        }
+
+        genreField.addEventListener('change', toggleConjointField);
+        toggleConjointField(); // Appel initial pour définir l'état
+    });
+</script>
 
 <style>
     /* Styles de la navbar */
@@ -93,7 +131,7 @@
         background-image: url("{% static 'image/save1.jpg' %}");
         background-size: cover;
         background-position: center;
-        height: 100vh; /* Assurez-vous que la hauteur est 100vh */
+        min-height: 100vh; /* Assurez-vous que la hauteur est minimale à 100vh */
         position: relative;
         margin-top: -60px; /* Ajustement pour superposer avec la navbar */
     }
@@ -117,6 +155,10 @@
         z-index: 3;
         width: 100%;
         max-width: 400px;
+        padding: 5px;
+        margin-top: 50px; /* Ajoutez une marge pour éviter le chevauchement */
+        overflow-y: auto; /* Ajoutez un défilement vertical si nécessaire */
+        max-height: 80vh; /* Hauteur maximale pour le conteneur du formulaire */
     }
 
     /* Styles pour les messages de succès */
