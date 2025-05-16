@@ -9,8 +9,11 @@ class Participant(models.Model):
         ('singleton', 'Singleton'),
     ])
     boisson = models.CharField(max_length=50, choices=[
-        ('fantan', 'Fantan'),
+        ('fanta', 'Fanta'),
         ('coca', 'Coca'),
+        ('Energie', 'Energie'),
+        ('Maltina', 'Maltina'),
+        ('Sprite', 'Sprite'),
         ('vitalo', 'Vitalo'),
         ('eau', 'Eau'),
         ('primus', 'Primus'),
@@ -25,8 +28,11 @@ class Participant(models.Model):
     nom_conjoint = models.CharField(max_length=100, blank=True, null=True)
     prenom_conjoint = models.CharField(max_length=100, blank=True, null=True)
     boisson_conjoint = models.CharField(max_length=50, choices=[
-        ('fantan', 'Fantan'),
+       ('fanta', 'Fanta'),
         ('coca', 'Coca'),
+        ('Energie', 'Energie'),
+        ('Maltina', 'Maltina'),
+        ('Sprite', 'Sprite'),
         ('vitalo', 'Vitalo'),
         ('eau', 'Eau'),
         ('primus', 'Primus'),

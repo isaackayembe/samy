@@ -41,25 +41,26 @@ def remplir_formulaire(request):
                 message = "Votre présence a déjà été enregistrée, cher invité."
                 return render(request, 'formulaire.html', {'form': form, 'message': message})
 
-            # Créer une instance de Participant et l'enregistrer
+            # Créer une instance de Participant avec tous les champs
             participant = Participant(
                 nom=form.cleaned_data['nom'],
                 postnom=form.cleaned_data['postnom'],
                 prenom=form.cleaned_data['prenom'],
-                genre=form.cleaned_data['genre']
+                genre=form.cleaned_data['genre'],
+                nom_conjoint=form.cleaned_data.get('nom_conjoint'),  # Utiliser .get() pour éviter les erreurs
+                prenom_conjoint=form.cleaned_data.get('prenom_conjoint'),
+                boisson_conjoint=form.cleaned_data.get('boisson_conjoint'),
+                boisson=form.cleaned_data['boisson']
             )
             participant.save()  # Enregistrer dans la base de données
 
             # Rediriger vers la page de succès
             return redirect('success')  # Assurez-vous que 'success' est le nom de votre route
-
     else:
-        form = MonFormulaire()  # Créer une nouvelle instance de formulaire
+        form = MonFormulaire()  # Assurez-vous de créer un formulaire vide pour GET
 
     return render(request, 'formulaire.html', {'form': form, 'message': message})
-
 @login_required
-
 def liste_liens(request):
     participants = Participant.objects.all()  # Récupère tous les participants
     count_participants = participants.count()  # Compte le nombre de participants

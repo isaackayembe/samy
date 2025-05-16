@@ -16,11 +16,11 @@
     <div class="overlay"></div>
     <div class="snow"></div>
     <div class="container text-center">
-        <h1 class="announcement">Bienvenue au mariage
-            <Br>de</Br> Judith et Samuel</h1>
-        <h1></h1>
-        <h3 class="confirmation">Merci de confirmer votre présence pour la date du 19 juillet 2025 en cliquant sur le bouton ci-dessous :</h3>
-        <a href="{% url 'remplir_formulaire' %}" target="_blank" class="btn-confirm">
+        <h1 class="announcement"><b> Bienvenue au mariage
+            <Br>de</Br> Judith et Samuel</h1></b>
+            <h1></h1>
+            <h3 class="confirmation">Merci de confirmer votre présence pour la date du 19 juillet 2025 en cliquant sur le bouton ci-dessous :</h3>
+            <a href="{% url 'remplir_formulaire' %}" target="_blank" class="btn-confirm">
             Remplir le formulaire
         </a>
     </div>
@@ -113,7 +113,7 @@
         /* Centre horizontalement */
         padding: 80px;
         /* Espacement en bas */
-        margin-top: 1px;
+        margin-top: 80px;
         /* Espace pour la navbar */
         position: relative;
         /* Position relative pour le dégradé */
@@ -204,7 +204,7 @@
     
     .announcement {
         font-family: 'Great Vibes', cursive;
-        font-size: 1.5em;
+        font-size: 2em;
         /* Ajustez selon vos besoins */
         color: #fff;
         text-align: center;
@@ -218,6 +218,8 @@
         /* Couleur du texte pour le paragraphe (blanc) */
         margin: 10px 0;
         /* Espacement autour des paragraphes */
+        font-weight: normal;
+        /* ou utilisez 300 pour un poids léger */
     }
     
     .btn-confirm {
